@@ -16,15 +16,25 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             BMICalculator program = new BMICalculator();
-            float height = program.GetHeightFromUser();
-            float weight = program.GetWeightFromUser();
-            double bmi = program.CalculateBMI(height, weight);
+            
+            while (true)
+            {
+                program.Run();
+            }
+        }
 
-            bool isMale = program.GetGenderFromUser();
-            string message = program.GetText(isMale, bmi);
+        private void Run()
+        {
+            float height = GetHeightFromUser();
+            float weight = GetWeightFromUser();
+            double bmi = CalculateBMI(height, weight);
+
+            bool isMale = GetGenderFromUser();
+            string message = GetText(isMale, bmi);
 
             Console.Write("Your BMI is " + bmi.ToString("0.0") + ".");
-            Console.WriteLine("You are " + message + ".");
+            Console.WriteLine("You are " + message + ".\n");
+            Console.WriteLine("*************************\n");
         }
 
         private float GetWeightFromUser()
