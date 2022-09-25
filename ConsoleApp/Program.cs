@@ -88,20 +88,21 @@ namespace ConsoleApp
         {
             womenRanges = new SortedDictionary<double, string>
             {
-                { 0, "anorexic" },
+                { 0, "severely underweight" },
                 { 17.5, "underweight" },
                 { 19.1, "in normal range" },
                 { 25.8, "marginally overweight" },
                 { 27.3, "overweight" },
                 { 32.3, "very overweight or obese" },
-                { 35, "severely obese" },
-                { 40, "morbidly obese" },
-                { 50, "super obese" }
+                { 40, "severely obese" },
+                { 50, "morbidly obese" },
+                { 60, "super obese" }
             };
 
             menRanges = new SortedDictionary<double, string>
             {
-                { 0, "underweight" },
+                { 0, "severely underweight" },
+                { 18.5, "underweight" },
                 { 20.7, "in normal range" },
                 { 26.4, "marginally overweight" },
                 { 27.8, "overweight" },
