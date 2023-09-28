@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace ConsoleApp
 {
-    internal class BMICalculator
+    internal class BmiCalculator
     {
         private SortedDictionary<double, string> womenRanges;
         private SortedDictionary<double, string> menRanges;
 
-        BMICalculator()
+        private BmiCalculator()
         {
-            PopulateBMIRanges();
+            PopulateBmiRanges();
         }
 
-        static void Main(string[] args)
+        private static void Main()
         {
-            BMICalculator program = new BMICalculator();
+            var program = new BmiCalculator();
             
             while (true)
             {
@@ -25,12 +25,12 @@ namespace ConsoleApp
 
         private void Run()
         {
-            float height = GetHeightFromUser();
-            float weight = GetWeightFromUser();
-            double bmi = CalculateBMI(height, weight);
+            var height = GetHeightFromUser();
+            var weight = GetWeightFromUser();
+            var bmi = CalculateBmi(height, weight);
 
-            bool isMale = GetGenderFromUser();
-            string message = GetText(isMale, bmi);
+            var isMale = GetGenderFromUser();
+            var message = GetText(isMale, bmi);
 
             Console.Write("Your BMI is " + bmi.ToString("0.0") + ".");
             Console.WriteLine("You are " + message + ".\n");
@@ -40,30 +40,32 @@ namespace ConsoleApp
         private float GetWeightFromUser()
         {
             Console.WriteLine("Enter your weight in kg.");
-            string input = Console.ReadLine();
-            return Single.Parse(input);
+            var input = Console.ReadLine();
+            return float.Parse(input);
         }
 
         private float GetHeightFromUser()
         {
             Console.WriteLine("Enter your height in m.");
-            string input = Console.ReadLine();
-            return Single.Parse(input);
+            var input = Console.ReadLine();
+            return float.Parse(input);
         }
 
         private bool GetGenderFromUser()
         {
             Console.WriteLine("Are you male (M) or female (F)?");
-            string gender = Console.ReadLine();
-            if (gender != null && !gender.ToUpper().Equals("M") && !gender.ToUpper().Equals("F"))
+            var gender = Console.ReadLine()?.Trim().ToUpper();
+
+            while (gender != "M" && gender != "F")
             {
-                Console.WriteLine("Sorry, I did not get that.");
-                GetGenderFromUser();
+                Console.WriteLine("Sorry, I did not get that. Please enter 'M' for male or 'F' for female.");
+                gender = Console.ReadLine()?.Trim().ToUpper();
             }
-            return gender.ToUpper().Equals("M");
+
+            return gender == "M";
         }
 
-        private double CalculateBMI(float height, float weight)
+        private double CalculateBmi(float height, float weight)
         {
             return weight / (height * height);
 
@@ -71,8 +73,8 @@ namespace ConsoleApp
 
         private string GetText(bool isMale, double bmi)
         {
-            SortedDictionary<double, string> range = isMale ? menRanges : womenRanges;
-            string result = "";
+            var range = isMale ? menRanges : womenRanges;
+            var result = "";
 
             foreach (KeyValuePair<double, string> entry in range)
             {
@@ -84,7 +86,7 @@ namespace ConsoleApp
             return result;
         }
 
-        private void PopulateBMIRanges()
+        private void PopulateBmiRanges()
         {
             womenRanges = new SortedDictionary<double, string>
             {
